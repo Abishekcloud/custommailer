@@ -26,6 +26,8 @@
             @endif
         </div>
 
+        <a href="{{route('forgotPassword')}}"> Forgot Password</a>
+
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
         
         @include('auth.partials.copy')

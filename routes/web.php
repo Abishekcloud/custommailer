@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
@@ -22,6 +23,11 @@ use App\Http\Controllers\LogoutController;
 //     return view('welcome');
 // });
 
+//Forgot Password Route
+Route::get('/forgotpassword',[ForgotPasswordController::class,'forgotPassword'])->name('forgotPassword');
+Route::post('/forgotpassword',[ForgotPasswordController::class,'forgotPasswordPost'])->name('forgotPassword.store');
+Route::get('/resetpassword',[ForgotPasswordController::class,'resetPassword'])->name('resetPassword');
+Route::post('/resetpassword',[ForgotPasswordController::class,'resetPasswordPost'])->name('resetPassword.post');
 
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
@@ -54,9 +60,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     });
 });
 
+
+
+
 // routes/web.php
-
-
 Route::get('/clear', function () {
     // Clear the application cache
     Artisan::call('cache:clear');
