@@ -37,6 +37,7 @@
 
     <main class="container">
         @yield('content')
+        @yield('userdata')
     </main>
 
     <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>

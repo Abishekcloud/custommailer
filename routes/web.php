@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -46,12 +47,32 @@ Route::post('/login', [LoginController::class,'login'])->name('login.perform');
 
 Route::middleware(['rolefinder'])->group(function () {
     
-    //Admin Controllers and Routes
-    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+    // Admin Routes
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/userlist', [AdminController::class, 'userList'])->name('admin.userList');
+        Route::get('/adduser', [AdminController::class, 'create'])->name('new.user');
+        Route::post('/adduser', [AdminController::class, 'store'])->name('user.store');
+        Route::get('/user/edit/{id}', [AdminController::class, 'edit'])->name('user.edit');
+        Route::put('/user/edit/{id}', [AdminController::class, 'update'])->name('user.update');
+        Route::delete('/user/{user}', [AdminController::class, 'destroy'])->name('user.destroy');
+        //Make Post Routes:
+            Route::prefix('posts')->group(function () {
+                Route::get('/show',[PostController::class, 'show'])->name('post.show');
+                Route::get('/create',[PostController::class,'index'])->name('post.create');
+                Route::post('/create',[PostController::class,'store'])->name('post.store');
+                Route::put('post/{post}', [PostController::class,'edit'])->name('post.edit');
+                Route::delete('post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+            });
+    });
 
-    //user Controllers and Routes
-    Route::get('/user',[UserController::class,'index'])->name('user.index');
+    // User Routes
+    Route::prefix('user')->group(function () {
+        Route::get('/', [HomeController::class, 'userPage'])->name('user.home');
+        // Other user routes here
+    });
 });
+
 
 Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
 
