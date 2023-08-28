@@ -83,18 +83,45 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $professions = Profession::all();
+        $posts = Post::findOrFail($id);
+        return view('posts.edit',compact('posts','professions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
-    }
+        try {
+            $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'profession_id' => 'required',
+                'publication' => 'nullable|sometimes',
+                'duration' => 'required',
+                'message' => 'required',
+                'image' => 'mimes:jpeg,jpg,png,gif|sometimes|max:10000',
+            ]);
+
+            $input = $request->all();
+            $post->update($input);
+            // dd($user);
+            // $user ->save();
+            // dd($input);
+
+            return redirect()->route('post.show')
+                ->with('success', 'Post Updated Successfully');
+        } catch (\Throwable $th) {
+            $params = ['status' => false, 'message' => $th->getMessage()];
+            return response()->json(['params' => $params]);
+        }
+    }   
+
 
     /**
      * Remove the specified resource from storage.

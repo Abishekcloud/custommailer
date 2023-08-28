@@ -79,8 +79,6 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{-- {{ $client->role }} --}}
                         <p>{{ $post->profession->name }}</p>
-                        <p>{{ $post->message }}</p>
-                    
                     </td>
                     <td class="px-6 py-4">
                         {{-- {{ $client->email }} --}}
@@ -112,10 +110,13 @@
                         <form action="{{route('post.destroy',$post->id )}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="font-medium text-green-600 dark:text-blue-500 hover:underline" type="submit">Edit</button>
-                             <button class="font-medium text-red-600 dark:text-blue-500 hover:underline" type="submit"
-                             onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                            <button class="font-medium text-red-600 dark:text-blue-500 hover:underline" type="submit"
+                            onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
                         </form>
+                        <a href="{{route('post.edit',$post->id )}}">
+                            <button class="font-medium text-green-600 dark:text-blue-500 hover:underline" type="submit">Edit</button>
+                        </a>
+                       
                         {{-- <button type="submit" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button> --}}
                     </td>
                 </tr>

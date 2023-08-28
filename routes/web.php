@@ -61,8 +61,9 @@ Route::middleware(['rolefinder'])->group(function () {
                 Route::get('/show',[PostController::class, 'show'])->name('post.show');
                 Route::get('/create',[PostController::class,'index'])->name('post.create');
                 Route::post('/create',[PostController::class,'store'])->name('post.store');
-                Route::put('post/{post}', [PostController::class,'edit'])->name('post.edit');
-                Route::delete('post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+                Route::get('edit/{post}',[PostController::class,'edit'])->name('post.edit');
+                Route::put('edit/{post}',[PostController::class,'update'])->name('post.update');
+                Route::delete('/{post}',[PostController::class, 'destroy'])->name('post.destroy');
             });
     });
 
