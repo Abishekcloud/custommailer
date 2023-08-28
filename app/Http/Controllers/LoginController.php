@@ -27,7 +27,17 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return $this->authenticated($request, $user);
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.index');
+        } else {
+            return $this->authenticated($request, $user);
+        }
+
+        if ($user->role === 'user') {
+            return redirect()->route('user.index');
+        } else {
+            return $this->authenticated($request, $user);
+        }
     }
 
 

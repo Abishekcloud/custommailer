@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -7,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,35 +32,31 @@ Route::get('/resetpassword',[ForgotPasswordController::class,'resetPassword'])->
 Route::post('/resetpassword',[ForgotPasswordController::class,'resetPasswordPost'])->name('resetPassword.post');
 
 
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{   
-    /**
-     * Home Routes
-     */
-    Route::get('/', 'HomeController@index')->name('home.index');
+Route::get('/', [HomeController::class,'index'])->name('home.index');
 
-    Route::group(['middleware' => ['guest']], function() {
-        /**
-         * Register Routes
-         */
-        Route::get('/register', 'RegisterController@show')->name('register.show');
-        Route::post('/register', 'RegisterController@register')->name('register.perform');
 
-        /**
-         * Login Routes
-         */
-        Route::get('/login', 'LoginController@show')->name('login.show');
-        Route::post('/login', 'LoginController@login')->name('login.perform');
+Route::get('/register', [RegisterController::class,'show'])->name('register.show');
+Route::post('/register', [RegisterController::class,'register'])->name('register.perform');
 
-    });
+/**
+ * Login Routes
+ */
+Route::get('/login', [LoginController::class,'show'])->name('login.show');
+Route::post('/login', [LoginController::class,'login'])->name('login.perform');
 
-    Route::group(['middleware' => ['auth']], function() {
-        /**
-         * Logout Routes
-         */
-        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
-    });
+Route::middleware(['rolefinder'])->group(function () {
+    
+    //Admin Controllers and Routes
+    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+
+    //user Controllers and Routes
+    Route::get('/user',[UserController::class,'index'])->name('user.index');
 });
+
+Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
+
+       
+ 
 
 
 

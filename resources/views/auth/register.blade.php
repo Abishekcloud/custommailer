@@ -4,7 +4,7 @@
     <form method="post" action="{{ route('register.perform') }}">
 
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <img class="mb-4" src="{!! url('images/bootstrap-logo.svg') !!}" alt="" width="72" height="57">
+        <img class="mb-4" src="{!! url('https://media.licdn.com/dms/image/C560BAQGzp3m--4VBMA/company-logo_200_200/0/1669807661558?e=2147483647&v=beta&t=rypRQ1CpP1dvrbVr7e_4zLWFLFYqhuThlXTUrmA-Y1Q') !!}" alt="" width="72" height="57">
         
         <h1 class="h3 mb-3 fw-normal">Register</h1>
 
