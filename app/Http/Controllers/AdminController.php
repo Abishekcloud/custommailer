@@ -76,6 +76,11 @@ class AdminController extends Controller
         //
     }
 
+
+    public function profileShow(User $user)
+    {
+        return view('admin.profile',compact('user'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

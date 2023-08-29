@@ -4,8 +4,8 @@
 <div class="p-6 sm:ml-64">
     <div class="p-8 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
 
-        <h1 class="mb-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">Make a <mark class="px-2 text-white bg-green-600 rounded dark:bg-green-500">Change</mark> Man..</h1>
-        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Edit an Existing Client and Make Your's Superior One</p>
+        <h1 class="mb-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">Here,Your <mark class="px-2 text-white bg-blue-600 rounded dark:bg-green-500">Profile</mark> Man..</h1>
+        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">If You want any changes You can..!</p>
 
 
  </div>

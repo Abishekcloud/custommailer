@@ -56,6 +56,8 @@ Route::middleware(['rolefinder'])->group(function () {
         Route::get('/user/edit/{id}', [AdminController::class, 'edit'])->name('user.edit');
         Route::put('/user/edit/{id}', [AdminController::class, 'update'])->name('user.update');
         Route::delete('/user/{user}', [AdminController::class, 'destroy'])->name('user.destroy');
+        //Profile Viewer routes
+        Route::get('/profile/{user}', [AdminController::class, 'profileShow'])->name('user.profileShow');
         //Make Post Routes:
             Route::prefix('posts')->group(function () {
                 Route::get('/show',[PostController::class, 'show'])->name('post.show');

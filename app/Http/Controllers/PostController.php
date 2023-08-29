@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\postConfirmJob;
+use App\Mail\PostCreate;
 use App\Models\Post;
 use App\Models\Profession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -58,8 +61,16 @@ class PostController extends Controller
                 $image->move($destinationPath, $profileImage);
                 $input['image'] = $profileImage;
             }
-            Post::create($input);
 
+            $fullName = $request->input('first_name') . ' ' . $request->input('last_name');
+
+            // Pass the full name and email to the email template
+            $input['full_name'] = $fullName;
+            
+            Post::create($input);
+            
+           postConfirmJob::dispatch();
+                       
             return redirect()->route('post.show')
                 ->with('success', 'Post created successfully.');
         } catch (\Throwable $th) {
